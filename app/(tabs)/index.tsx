@@ -18,19 +18,14 @@ export default function OverKeyboardViewExample() {
   return (
     <View style={styles.container}>
       {/* TextInput wrapped in KeyboardStickyView */}
-      <KeyboardStickyView style={styles.keyboardStickyView}>
+      <KeyboardStickyView style={[styles.keyboardStickyView, {paddingBottom: 100}]}>
         <TextInput style={styles.input} testID="over_keyboard_view.input" />
         <Button
         testID="over_keyboard_view.show"
         title="Show"
         onPress={() => setShow(true)}
       />
-      </KeyboardStickyView>
-      
-      {/* Button outside of KeyboardStickyView */}
-   
-      
-      {/* OverKeyboardView outside of KeyboardStickyView but in same parent */}
+      <View>
       <OverKeyboardView visible={isShow}>
         <GestureHandlerRootView style={styles.fullScreen}>
           <TouchableWithoutFeedback
@@ -49,6 +44,14 @@ export default function OverKeyboardViewExample() {
           </TouchableWithoutFeedback>
         </GestureHandlerRootView>
       </OverKeyboardView>
+      </View>
+      </KeyboardStickyView>
+      
+      {/* Button outside of KeyboardStickyView */}
+   
+      
+      {/* OverKeyboardView outside of KeyboardStickyView but in same parent */}
+   
     </View>
   );
 }
@@ -71,6 +74,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
+    backgroundColor: "green",
   },
   background: {
     width: 200,
