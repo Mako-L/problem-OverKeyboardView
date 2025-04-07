@@ -5,6 +5,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -23,17 +25,24 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
+  useEffect(() => {
+    // Unlock screen orientation to allow rotation
+    ScreenOrientation.unlockAsync();
+  }, []);
+
   if (!loaded) {
     return null;
   }
 
   return (
+    <KeyboardProvider>
     <ThemeProvider value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
-      <Stack>
+        <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
+    </KeyboardProvider>
   );
 }

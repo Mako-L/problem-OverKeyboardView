@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Button,
+  Text,
   StyleSheet,
   TextInput,
   TouchableWithoutFeedback,
@@ -10,43 +11,57 @@ import {
   GestureHandlerRootView,
   TouchableOpacity,
 } from "react-native-gesture-handler";
-import { KeyboardStickyView, OverKeyboardView } from "react-native-keyboard-controller";
+import { KeyboardStickyView, OverKeyboardView, KeyboardProvider} from "react-native-keyboard-controller";
 
 export default function OverKeyboardViewExample() {
   const [isShow, setShow] = useState(false);
 
   return (
     <View style={styles.container}>
+    
       {/* TextInput wrapped in KeyboardStickyView */}
-      <KeyboardStickyView style={[styles.keyboardStickyView, {paddingBottom: 100}]}>
-        <TextInput style={styles.input} testID="over_keyboard_view.input" />
-        <Button
-        testID="over_keyboard_view.show"
-        title="Show"
-        onPress={() => setShow(true)}
-      />
+       <GestureHandlerRootView style={styles.fullScreen}>
       <View>
       <OverKeyboardView visible={isShow}>
-        <GestureHandlerRootView style={styles.fullScreen}>
+    
           <TouchableWithoutFeedback
             style={styles.fullScreen}
             testID="over_keyboard_view.background"
-            onPress={() => setShow(false)}
+            onPress={() => {
+              console.log("hide")
+              setShow(false)
+            }}
           >
             <View style={styles.overlayContainer}>
               <TouchableOpacity
                 testID="over_keyboard_view.content"
-                onPress={() => setShow(false)}
+                onPress={() => {
+                  console.log("hide")
+                  setShow(false)
+                }}
               >
                 <View style={styles.background} />
               </TouchableOpacity>
             </View>
           </TouchableWithoutFeedback>
-        </GestureHandlerRootView>
+     
       </OverKeyboardView>
       </View>
+                
+      <KeyboardStickyView style={[styles.keyboardStickyView, {paddingBottom: 100}]}>
+        <TextInput style={styles.input} testID="over_keyboard_view.input" />
+        <TouchableOpacity
+        testID="over_keyboard_view.show"
+                
+        onPress={() =>{
+          console.log("show")
+          setShow(true)
+        }}
+      >
+        <Text>Show</Text>
+      </TouchableOpacity>
       </KeyboardStickyView>
-      
+      </GestureHandlerRootView>
       {/* Button outside of KeyboardStickyView */}
    
       
