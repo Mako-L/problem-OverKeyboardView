@@ -69,9 +69,11 @@ const InputBox: React.FC<InputBoxProps> = ({ onSendMessage }) => {
             <TouchableOpacity
               ref={buttonRef}
               style={[styles.button, { backgroundColor: "#f5f5f5" }]}
-              onPress={() => {
+              onPressIn={() => {
                 measureButton();
-                setShowUploadMenu(!showUploadMenu);
+                setTimeout(() => {
+                  setShowUploadMenu(!showUploadMenu);
+                }, 100);
               }}
               onLayout={handleButtonLayout}
             >
@@ -123,6 +125,7 @@ const InputBox: React.FC<InputBoxProps> = ({ onSendMessage }) => {
           onPress={() => setShowUploadMenu(false)}
           testID="inputbox.overlay"
         >
+          <View style={{ flex: 1, width:'100%' }}>
           <View
             style={{
               position: "absolute",
@@ -144,6 +147,7 @@ const InputBox: React.FC<InputBoxProps> = ({ onSendMessage }) => {
               <Text>Upload Menu Content</Text>
               <Text>This is where the upload menu would be!</Text>
             </View>
+          </View>
           </View>
         </TouchableOpacity>
       </OverKeyboardView>
