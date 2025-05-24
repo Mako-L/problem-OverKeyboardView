@@ -5,8 +5,8 @@
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
+    "android": "expo run:android --device",
+    "ios": "expo run:ios --device",
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint"
@@ -34,9 +34,9 @@
     "expo-web-browser": "~14.1.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-native": "0.79.0",
+    "react-native": "0.79.1",
     "react-native-gesture-handler": "~2.24.0",
-    "react-native-keyboard-controller": "github:kirillzyusko/react-native-keyboard-controller#fix/over-keyboard-view-fabric-rotation",
+    "react-native-keyboard-controller": "github:kirillzyusko/react-native-keyboard-controller#main",
     "react-native-reanimated": "~3.17.3",
     "react-native-safe-area-context": "5.3.0",
     "react-native-screens": "~4.10.0",

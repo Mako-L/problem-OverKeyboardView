@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Dimensions, FlatList, TextInput, ActivityIndicator } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Dimensions, FlatList, TextInput, ActivityIndicator, Alert } from "react-native";
+import { useSafeAreaFrame, useSafeAreaInsets } from "react-native-safe-area-context";
 import { styles } from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import Chat, { Message } from "../Chat";
@@ -10,6 +10,8 @@ import NoChatWrapper from "../NoChatWrapper";
 import InputBox from "../InputBox";
 import InputBoxContainer from "../InputBoxWrapper";
 import { OverKeyboardView, KeyboardStickyView } from "react-native-keyboard-controller";
+import { useWindowDimensions } from "react-native";
+
 
 interface MainScreenDemoProps {
   openLeftDrawer?: () => void;
@@ -54,8 +56,10 @@ const MainScreenDemo: React.FC<MainScreenDemoProps> = ({ openLeftDrawer }) => {
   const [lastNetworkResponse, setLastNetworkResponse] = useState<Date | null>(null);
   const [networkErrorCount, setNetworkErrorCount] = useState(0);
   const [networkSuccessCount, setNetworkSuccessCount] = useState(0);
-  
-  // Set up periodic mock server requests
+  const { width, height } = useWindowDimensions();
+  console.log(width, height);
+  const { width: safeAreaWidth, height: safeAreaHeight } = useSafeAreaFrame();
+  console.log(safeAreaWidth, safeAreaHeight);
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
     
@@ -218,7 +222,7 @@ const MainScreenDemo: React.FC<MainScreenDemoProps> = ({ openLeftDrawer }) => {
       </View>
       
       <View>
-        <OverKeyboardView visible={isShow}>
+        <OverKeyboardView visible={isShow} width={safeAreaWidth} height={safeAreaHeight}>
           <TouchableWithoutFeedback
             style={styles.fullScreen}
             testID="over_keyboard_view.background"
